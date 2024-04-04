@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title style="color:Red;">BAU Calculator</title>
+ <link rel="stylesheet" href="styles.css">
+ <img src="baucal.png" alt="title">
+</head>
+<body>
+<video autoplay loop muted plays-inline class="back-video">
+ <source src="videoplayback.mp4" type="video/mp4">
+</video>
+<div class="calculator">
+    <input type="text" id="result" readonly>
+    <br>
+    <div class="number-buttons">
+	<input type="button" value="1" onclick="addToExpression('1')">
+        <input type="button" value="2" onclick="addToExpression('2')">
+        <input type="button" value="3" onclick="addToExpression('3')">
+        <input type="button" value="4" onclick="addToExpression('4')">
+        <input type="button" value="5" onclick="addToExpression('5')">
+        <input type="button" value="6" onclick="addToExpression('6')">
+        <input type="button" value="7" onclick="addToExpression('7')">
+        <input type="button" value="8" onclick="addToExpression('8')">
+        <input type="button" value="9" onclick="addToExpression('9')">
+        <input type="button" value="." onclick="addToExpression('.')">
+	<input type="button" value="0" onclick="addToExpression('0')">
+	<input type="button" value="AC" onclick="clearExpression()">
+    </div>
+    <div class="operation-buttons">
+	<input type="button" value="=" onclick="calculate()">
+	<input type="button" value="-" onclick="addToExpression('-')">
+        <input type="button" value="+" onclick="addToExpression('+')">
+        <input type="button" value="*" onclick="addToExpression('*')">
+        <input type="button" value="/" onclick="addToExpression('/')">
+        <input type="button" value="Decimal" onclick="convertTo('decimal')">
+        <input type="button" value="Binary" onclick="convertTo('binary')">
+        <input type="button" value="Octal" onclick="convertTo('octal')">
+        <input type="button" value="Hex" onclick="convertTo('hexadecimal')">
+    </div>
+</div>
+
+<script>
+    function addToExpression(value) {
+        document.getElementById('result').value += value;
+    }
+
+    function calculate() {
+        try {
+            var result = eval(document.getElementById('result').value);
+            document.getElementById('result').value = result;
+        } catch (error) {
+            document.getElementById('result').value = 'Error';
+        }
+    }
+
+    function clearExpression() {
+        document.getElementById('result').value = '';
+    }
+
+    function convertTo(type) {
+        var result = document.getElementById('result').value;
+        if (type === 'binary') {
+            result = parseInt(result, 10).toString(2);
+        } else if (type === 'octal') {
+            result = parseInt(result, 10).toString(8);
+        } else if (type === 'hexadecimal') {
+            result = parseInt(result, 10).toString(16).toUpperCase();
+        }
+        document.getElementById('result').value = result;
+    }
+</script>
+
+</body>
+</html>
